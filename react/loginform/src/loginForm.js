@@ -6,22 +6,28 @@ import React from 'react';
 class loginForm extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { username: '' ,  password: '' }
+    this.state = { username: '' ,  password: '', some: ''}
   }
 
   mySubmitHandler = (event) => {
     event.preventDefault();
     //var username = this.state.username;
     //var password = this.state.password;
-    //alert("You are submitting " + username + ' and ' + password);
+    alert("You are submitting " + this.state.username + ' and ' + this.state.password);
     fetch("./login", {
       method: "POST",
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify( this.state ),
     })
-    .then(response => response.json())  
+    .then(response => 
+      response.json())
     .then(data => {
-    console.log('Success:', data);
+      console.log(data)
+      if (data.status === '200') {
+        this.props.history.push("/checkInForm");
+      }
+      else { alert('wrong username or password, please try again')
+       }
     })
   .catch((error) => {
   console.error('Error:', error);

@@ -13,6 +13,7 @@ class registrationForm extends React.Component {
     event.preventDefault();
     fetch("./registration", {
       method: "POST",
+      mode: "cors",
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify( this.state ),
     })
