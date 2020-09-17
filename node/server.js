@@ -152,13 +152,13 @@ function doLogin(req,res,cookies) {
             if (result) {
                 cookies.set('username', obj.username , { signed: true })
                 console.log('OK 1')
-                // res.writeHead(200, {});  
-               // res.write('login')
+                res.writeHead(200, {}); 
+                res.write(JSON.stringify({'status' : '200'})) 
             }
             else {
                 console.log('NOK 1')
-                res.writeHead(200, {});  
-                res.write('login')
+                res.writeHead(404, {}); 
+                res.write(JSON.stringify({'status' : '401'})) 
             }
             res.end();
         });
