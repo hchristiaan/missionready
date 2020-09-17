@@ -100,7 +100,9 @@ function doRegistration(req,res) {
     });
               
     res.writeHead(200, {});  
-    res.write('You are almost done. We have sent you an email to the email address that you use for registration');
+    data = JSON.stringify({'success': 'yes'})
+    res.write(data);
+    // res.write('You are almost done. We have sent you an email to the email address that you use for registration');
     res.end();
 }
 
@@ -118,10 +120,12 @@ function doCheckIn(req,res,cookies) {
             if (err) throw err;
             if (result) {
                 console.log('OK 1')
+                res.write(JSON.stringify({'success' : 'yes'}))
                 res.writeHead(200, {}); 
             }
             else {
                 console.log('NOK 1')
+                res.write(JSON.stringify({'success' : 'no'}))
                 res.writeHead(500, {});  
             }
             res.end();
